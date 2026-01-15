@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Подтверждение изменений договора</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #020617;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56,189,248,0.15);
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --success: #22c55e;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Inter, sans-serif;
+      background: radial-gradient(1200px 600px at 20% -10%, #1e293b, transparent), var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 820px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    .header {
+      padding: 28px 32px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .header h1 {
+      margin: 0 0 8px 0;
+      font-size: 26px;
+      font-weight: 600;
+    }
+
+    .header p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .content {
+      padding: 32px;
+      display: grid;
+      gap: 24px;
+    }
+
+    .changes {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px;
+      padding: 20px;
+      max-height: 260px;
+      overflow-y: auto;
+    }
+
+    .changes h3 {
+      margin-top: 0;
+      font-size: 16px;
+      margin-bottom: 12px;
+      color: #f8fafc;
+    }
+
+    .change-item {
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: rgba(56,189,248,0.08);
+      border: 1px solid var(--accent-soft);
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .agreement {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .agreement input {
+      margin-top: 4px;
+      accent-color: var(--accent);
+      width: 18px;
+      height: 18px;
+    }
+
+    .footer {
+      padding: 24px 32px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .status {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .btn {
+      appearance: none;
+      border: none;
+      border-radius: 12px;
+      padding: 14px 22px;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+      color: #020617;
+      box-shadow: 0 10px 30px rgba(56,189,248,0.35);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .btn-primary:not(:disabled):hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 40px rgba(56,189,248,0.45);
+    }
+
+    .success {
+      color: var(--success);
+      font-weight: 500;
+    }
+
+    @media (max-width: 600px) {
+      .header h1 { font-size: 22px; }
+      .content { padding: 24px; }
+      .footer { padding: 20px 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="header">
+        <h1>Подтверждение изменений договора</h1>
+        <p>В договор были внесены обновления. Ознакомьтесь и подтвердите согласие.</p>
+      </div>
+
+      <div class="content">
+        <div class="changes">
+          <h3>Основные изменения</h3>
+          <div class="change-item">Изменены условия электронного подписания и хранения данных.</div>
+          <div class="change-item">Обновлён пункт об ответственности сторон.</div>
+          <div class="change-item">Добавлен раздел о цифровой идентификации и подтверждении согласия.</div>
+          <div class="change-item">Уточнены сроки действия и порядок расторжения договора.</div>
+        </div>
+
+        <label class="agreement">
+          <input type="checkbox" id="agree" />
+          <span>Я подтверждаю, что ознакомился(лась) со всеми изменениями электронного договора, понимаю их содержание и полностью соглашаюсь со всеми правками.</span>
+        </label>
+      </div>
+
+      <div class="footer">
+        <div class="status" id="status">Ожидание подтверждения</div>
+        <button class="btn btn-primary" id="confirmBtn" disabled>Подтвердить изменения</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const agree = document.getElementById('agree');
+    const btn = document.getElementById('confirmBtn');
+    const status = document.getElementById('status');
+
+    agree.addEventListener('change', () => {
+      btn.disabled = !agree.checked;
+    });
+
+    btn.addEventListener('click', () => {
+      btn.disabled = true;
+      btn.textContent = 'Подтверждено';
+      status.innerHTML = '<span class="success">Изменения успешно подтверждены ✔</span>';
+    });
+  </script>
+</body>
+</html>
